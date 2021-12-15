@@ -20,6 +20,8 @@ private slots:
 
     void on_checkTagsConsistency_clicked();
 
+    void on_format_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

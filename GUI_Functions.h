@@ -11,4 +11,5 @@
 */
 QString ViewFileContent(Ui::MainWindow *ui , QWidget *thisWidget, QFile &file);
 
+
 #endif // GUI_FUNCTIONS_H

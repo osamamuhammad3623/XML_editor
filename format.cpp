@@ -3,18 +3,13 @@
 #include <iostream>
 #include <stack>
 #include <vector>
+#include "QString"
 using namespace std;
 
 
-void printIndentation(int n){
-    for (int i=0; i<n;i++){
-        cout << "   ";
-    }
-}
+QString format(vector<string> &rows){
 
-
-void printFormatted(vector<string> &rows){
-
+    QString formatted = "";
     int level=-1;
 
     for(string s : rows){
@@ -24,8 +19,13 @@ void printFormatted(vector<string> &rows){
             level--;
         }
 
-        printIndentation(level);
-        cout << s << endl;
-
+        /* printing indentation levels */
+        for (int i=0; i<level;i++){
+            formatted += "     ";
+        }
+        formatted += QString::fromStdString(s);
+        formatted += '\n';
     }
+
+    return formatted;
 }
