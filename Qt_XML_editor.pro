@@ -10,11 +10,17 @@ CONFIG += c++11
 
 SOURCES += \
     GUI_Functions.cpp \
+    common.cpp \
+    consistency.cpp \
+    format.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     GUI_Functions.h \
+    common.h \
+    consistency.h \
+    format.h \
     mainwindow.h
 
 FORMS += \

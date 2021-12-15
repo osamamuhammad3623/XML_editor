@@ -4,15 +4,19 @@
 #include "QFile"
 #include "QTextStream"
 #include "QMessageBox"
+#include "QString"
 
 
-void ViewFileContent(Ui::MainWindow *ui , QWidget *thisWidget, QFile &file){
+QString ViewFileContent(Ui::MainWindow *ui , QWidget *thisWidget, QFile &file){
+    QString lines="";
     if (file.open(QFile::ReadOnly | QFile::Text)){
 
         QTextStream data(&file);
-        QString lines = data.readAll();
+        lines = data.readAll();
         ui->originalText->setText(lines);
     }else{
         QMessageBox::warning(thisWidget, "File Error", "Cannot open the file!");
     }
+
+    return lines;
 }
