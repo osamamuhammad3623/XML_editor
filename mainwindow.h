@@ -18,6 +18,8 @@ public:
 private slots:
     void on_loadFile_clicked();
 
+    void on_checkTagsConsistency_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
