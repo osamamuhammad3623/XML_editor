@@ -29,6 +29,7 @@ bool balanced=false; /* tags in xml */
 
 void MainWindow::on_loadFile_clicked()
 {
+    ui->formattedText->setText(""); /* clear text area */
     QString filePath = ui->filePath->text();
     QFile file(filePath);
     if (file.exists()){
@@ -58,7 +59,6 @@ void MainWindow::on_checkTagsConsistency_clicked()
 }
 
 
-#warning "Format function gives shifted levels"
 void MainWindow::on_format_clicked()
 {
     if (xmlLines == ""){

@@ -4,6 +4,7 @@
 #include "QString"
 using namespace std;
 
+void printIndentation(int n, QString &str);
 
 QString format(vector<QString> &rows);
 
