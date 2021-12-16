@@ -91,6 +91,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="checkTagsConsistency">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -102,8 +105,14 @@
     <property name="text">
      <string>Check tags consistency</string>
     </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="QPushButton" name="format">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -117,6 +126,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="analysis">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -130,6 +142,9 @@
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -148,6 +163,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="saveNew">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>580</x>

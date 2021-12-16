@@ -3,14 +3,14 @@
 using namespace std;
 
 bool isOpeningTag(QString row){
-    if ((row[0] == '<') && (row[1]!='/')){
+    if ((row[0] == '<') && (row[1]!='/') && (row[row.size()-1] == '>')){
         return true;
     }
     return false;
 }
 
 bool isClosingTag(QString row){
-    if ((row[0] == '<') && (row[1] == '/')) {
+    if ((row[0] == '<') && (row[1] == '/') && (row[row.size()-1] == '>')) {
         return true;
     }
     return false;
@@ -56,14 +56,4 @@ vector<QString> xmlStringToVector(QString &text){
     }
 
     return vectoredRows;
-}
-
-QString vectorToQString(vector<string> &stringVector){
-    QString stringRows="";
-    for (string str : stringVector){
-        stringRows += QString::fromStdString(str); /* convert from string to QString */
-        stringRows += '\n';
-    }
-
-    return stringRows;
 }

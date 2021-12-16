@@ -16,5 +16,4 @@ bool isData(QString row);
  * */
 vector<QString> xmlStringToVector(QString &text);
 
-
 #endif /* COMMON_H_ */

@@ -7,6 +7,7 @@
 #include "QMessageBox"
 #include "QDebug"
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -57,7 +58,7 @@ void MainWindow::on_checkTagsConsistency_clicked()
 }
 
 
-#error "Format function gives shifted levels"
+#warning "Format function gives shifted levels"
 void MainWindow::on_format_clicked()
 {
     if (xmlLines == ""){
