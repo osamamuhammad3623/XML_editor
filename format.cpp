@@ -1,18 +1,14 @@
 #include "format.h"
 #include "common.h"
-#include <iostream>
-#include <stack>
-#include <vector>
-#include "QString"
 using namespace std;
 
 
-QString format(vector<string> &rows){
+QString format(vector<QString> &rows){
 
     QString formatted = "";
     int level=-1;
 
-    for(string s : rows){
+    for(QString s : rows){
         if(isOpeningTag(s) || isData(s)){
             level++;
         }else if (isClosingTag(s)){
@@ -23,7 +19,8 @@ QString format(vector<string> &rows){
         for (int i=0; i<level;i++){
             formatted += "     ";
         }
-        formatted += QString::fromStdString(s);
+
+        formatted += s;
         formatted += '\n';
     }
 

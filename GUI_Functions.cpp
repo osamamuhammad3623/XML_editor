@@ -1,11 +1,8 @@
 #include "mainwindow.h"
 #include "GUI_Functions.h"
 #include "ui_mainwindow.h"
-#include "QFile"
 #include "QTextStream"
 #include "QMessageBox"
-#include "QString"
-#include <iostream>
 using namespace std;
 
 

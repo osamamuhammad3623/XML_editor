@@ -1,35 +1,31 @@
 #include "common.h"
-#include <iostream>
-#include <vector>
 #include "QString"
 using namespace std;
 
-bool isOpeningTag(string row){
+bool isOpeningTag(QString row){
     if ((row[0] == '<') && (row[1]!='/')){
         return true;
     }
     return false;
 }
 
-bool isClosingTag(string row){
+bool isClosingTag(QString row){
     if ((row[0] == '<') && (row[1] == '/')) {
         return true;
     }
     return false;
 }
 
-bool isData(string row){
-    if (isOpeningTag(row) || isClosingTag(row)){
-        return false;
-    }
-    return true;
+bool isData(QString row){
+    /* a row contains data if it's neither an opening tag nor a closing one */
+    return (!(isOpeningTag(row)) && (!isClosingTag(row)));
 }
 
-vector<string> xmlStringToVector(string &text){
-    string textRows = "";
+vector<QString> xmlStringToVector(QString &text){
+    QString textRows = "";
 
     /* replace all occurrences in place to separate tags from data */
-    for (char c : text){
+    for (QChar c : text){
         if (c == '<'){
             textRows += "\n<";
         }else if (c == '>'){
@@ -39,10 +35,10 @@ vector<string> xmlStringToVector(string &text){
         }
     }
 
-    /* convert string to vector of strings */
-    string line = "";
-    vector<string> rows;
-    for (char c : textRows){
+    /* convert QString to vector of QStrings */
+    QString line = "";
+    vector<QString> rows;
+    for (QChar c : textRows){
         if (c != '\n'){
             line+= c;
         }else{
@@ -52,8 +48,8 @@ vector<string> xmlStringToVector(string &text){
     }
 
     /* remove empty rows */
-    vector<string> vectoredRows;
-    for (string s : rows){
+    vector<QString> vectoredRows;
+    for (QString s : rows){
         if (s.size() >= 1){
             vectoredRows.push_back(s);
         }

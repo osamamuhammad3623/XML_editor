@@ -21,43 +21,34 @@ MainWindow::~MainWindow()
 
 
 /* GLobal variables */
-string stdStringLines="";
-vector<string> xmlVector;
+QString xmlLines="";
+vector<QString> xmlVector;
+bool tagsChecked = false;
+bool balanced=false; /* tags in xml */
 
-
-void setStdStringAndVector(QString &originalXML){
-    stdStringLines = originalXML.toStdString(); /* convert from string to QString */
-    xmlVector = xmlStringToVector(stdStringLines);
-}
-
-
-/*
- * A function that checks if file path is valid
- * if the file is valid, open it & display its content
-*/
 void MainWindow::on_loadFile_clicked()
 {
     QString filePath = ui->filePath->text();
     QFile file(filePath);
     if (file.exists()){
-        QString linesInOriginalXML = ViewFileContent(ui, this, file);
-        setStdStringAndVector(linesInOriginalXML);
+        /* updating global variables to prepare them for processing */
+        xmlLines = ViewFileContent(ui, this, file);
+        xmlVector = xmlStringToVector(xmlLines);
     }else{
         QMessageBox::warning(this, "File Path", "No such File!");
     }
 }
 
 
-/*
- * Check balanced tags process
-*/
 void MainWindow::on_checkTagsConsistency_clicked()
 {
-    if (stdStringLines == ""){
-        QMessageBox::information(this, "File Error", "Choose a file first!");
+    if (xmlLines == ""){
+        QMessageBox::warning(this, "File Error", "Choose a file first!");
+        return;
     }
 
-    bool balanced = checkBalancedTags(xmlVector);
+    balanced = checkBalancedTags(xmlVector);
+    tagsChecked = true;
     if (balanced){
         QMessageBox::information(this, "Tags Consistency", "Tags are balanced");
     }else{
@@ -66,14 +57,19 @@ void MainWindow::on_checkTagsConsistency_clicked()
 }
 
 
-/*
- * Formatting XML process
-*/
 #error "Format function gives shifted levels"
 void MainWindow::on_format_clicked()
 {
-    if (stdStringLines == ""){
-        QMessageBox::information(this, "File Error", "Choose a file first!");
+    if (xmlLines == ""){
+        QMessageBox::warning(this, "File Error", "Choose a file first!");
+        return;
+    }else if (!tagsChecked){
+        /* I shouldn't format if tags are not even balanced */
+        QMessageBox::warning(this, "Formatting", "You should check if tags are balanced or not first!");
+        return;
+    }else if (!balanced){
+        QMessageBox::warning(this, "Tags Consistency", "Tags are NOT balanced to format!");
+        return;
     }
 
     ui->formattedText->setText(format(xmlVector));

@@ -1,14 +1,12 @@
 #include "consistency.h"
 #include "common.h"
-#include <iostream>
 #include <stack>
-#include <vector>
 using namespace std;
 
 
-bool matchTopWithTag(string stackTop, string tag){
-    string tempTag="";
-    for(char c : tag){
+bool matchTopWithTag(QString stackTop, QString tag){
+    QString tempTag="";
+    for(QChar c : tag){
         if(c != '/'){
             tempTag+= c;
         }
@@ -18,12 +16,12 @@ bool matchTopWithTag(string stackTop, string tag){
 }
 
 
-bool checkBalancedTags(vector<string> &rows){
+bool checkBalancedTags(vector<QString> &rows){
 
-    stack<string> tagStack;
+    stack<QString> tagStack;
 
     /* adding tags to stack */
-    for (string row : rows){
+    for (QString row : rows){
 
         /* if the tag is opening, just push to stack */
         if (isOpeningTag(row)) {

@@ -16,10 +16,23 @@ public:
     ~MainWindow();
 
 private slots:
+
+    /*
+     * Desc: A function that checks if file path is valid
+     * if the file is valid, open it & display its content
+    */
     void on_loadFile_clicked();
 
+
+    /*
+     * Check balanced tags process
+    */
     void on_checkTagsConsistency_clicked();
 
+
+    /*
+     * Formatting XML process
+    */
     void on_format_clicked();
 
 private:
