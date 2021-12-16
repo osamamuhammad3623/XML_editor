@@ -44,3 +44,21 @@ bool checkBalancedTags(vector<QString> &rows){
         return false;
     }
 }
+
+
+bool checkDataPosition(vector<QString> &rows){
+
+    for (int i=0; i< rows.size() -1; i++){
+        if (isClosingTag(rows[i]) && isData(rows[i+1])){
+            return false;
+        }
+    }
+    return true;
+}
+
+
+
+
+
+
+

@@ -16,4 +16,11 @@ bool matchTopWithTag(QString stackTop, QString tag);
  * */
 bool checkBalancedTags(vector<QString> &rows);
 
+
+/*
+ * Desc: A function that checks if data is placed not between an opening & closing tags
+ *      - Data must be between an opening tag and a closing tag
+*/
+bool checkDataPosition(vector<QString> &rows);
+
 #endif // CONSISTENCY_H

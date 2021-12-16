@@ -35,6 +35,12 @@ private slots:
     */
     void on_format_clicked();
 
+
+    /*
+     * Save formatted XML into a new file process
+    */
+    void on_saveNew_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
