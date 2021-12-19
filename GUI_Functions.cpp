@@ -14,12 +14,13 @@ QString ViewFileContent(Ui::MainWindow *ui , QWidget *thisWidget, QFile &file){
         lines = data.readAll();
         ui->originalText->setText(lines);
 
-        /* enable features for xml */
+        /* enable buttons for xml */
         ui->checkTagsConsistency->setEnabled(true);
         ui->analysis->setEnabled(true);
         ui->format->setEnabled(true);
         ui->saveNew->setEnabled(true);
         ui->minify->setEnabled(true);
+        ui->visualize->setEnabled(true);
     }else{
         QMessageBox::warning(thisWidget, "File Error", "Cannot open the file!");
     }

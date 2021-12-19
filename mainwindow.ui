@@ -14,37 +14,6 @@
    <string>XML Editor Project</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>20</y>
-      <width>161</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>15</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>XML file path:</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="filePath">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>30</y>
-      <width>681</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QTextEdit" name="originalText">
     <property name="geometry">
      <rect>
@@ -89,14 +58,14 @@
    <widget class="QPushButton" name="loadFile">
     <property name="geometry">
      <rect>
-      <x>930</x>
+      <x>60</x>
       <y>30</y>
-      <width>110</width>
+      <width>261</width>
       <height>30</height>
      </rect>
     </property>
     <property name="text">
-     <string>OK!</string>
+     <string>Load XML file</string>
     </property>
    </widget>
    <widget class="QPushButton" name="checkTagsConsistency">
@@ -217,6 +186,19 @@
     </property>
     <property name="text">
      <string>Visualize</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="filePath">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>30</y>
+      <width>731</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

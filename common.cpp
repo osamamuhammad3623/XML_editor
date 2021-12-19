@@ -44,11 +44,11 @@ vector<QString> xmlStringToVector(QString &text){
     QString line = "";
     vector<QString> rows;
     for (QChar c : textRows){
-        if (c != '\n'){
-            line+= c;
-        }else{
+        if (c == '\n'){
             rows.push_back(line);
             line = "";
+        }else{
+            line+= c;
         }
     }
 

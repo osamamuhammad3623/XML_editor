@@ -6,6 +6,7 @@
 #include "GUI_Functions.h"
 #include "QMessageBox"
 #include "QTextStream"
+#include "QFileDialog"
 #include "QDebug"
 
 
@@ -31,15 +32,13 @@ bool balanced=false; /* tags in xml */
 void MainWindow::on_loadFile_clicked()
 {
     ui->formattedText->setText(""); /* clear text area */
-    QString filePath = ui->filePath->text();
+    QString filePath = QFileDialog::getOpenFileName(this, "Choose XML file");
     QFile file(filePath);
-    if (file.exists()){
-        /* updating global variables to prepare them for processing */
-        xmlLines = ViewFileContent(ui, this, file);
-        xmlVector = xmlStringToVector(xmlLines);
-    }else{
-        QMessageBox::warning(this, "File Path", "No such File!");
-    }
+
+    ui->filePath->setText("\"" + filePath + "\"");
+    /* updating global variables to prepare them for processing */
+    xmlLines = ViewFileContent(ui, this, file);
+    xmlVector = xmlStringToVector(xmlLines);
 
     file.close();
 }
@@ -52,9 +51,9 @@ void MainWindow::on_checkTagsConsistency_clicked()
         return;
     }
 
-    balanced = (checkBalancedTags(xmlVector) && checkDataPosition(xmlVector));
-    consistencyChecked = true;
+    balanced = checkBalancedTags(xmlVector);
     if (balanced){
+        consistencyChecked = true;
         QMessageBox::information(this, "Tags Consistency", "Tags are balanced");
     }else{
         QMessageBox::information(this, "Tags Consistency", "Tags are NOT balanced");
@@ -104,12 +103,30 @@ void MainWindow::on_saveNew_clicked()
 void MainWindow::on_minify_clicked()
 {
     QString minified = "";
-    /* remove all new lines chars */
-    for (QChar c : xmlLines){
-        if (c != '\n'){
-            minified += c;
+    QChar c;
+
+    for (int i =0; i< xmlLines.size(); i++){
+        c = xmlLines[i];
+
+        /* remove all newline and tabs chars */
+        if (c == '\n' || c == '\t'){
+            continue;
         }
+
+        /* remove all spaces between a closing tag and the next opening tag */
+        else if (c == '>'){
+            minified += '>';
+            i++;
+
+            while (xmlLines[i] == ' ' || xmlLines[i] == '\n' || xmlLines[i] == '\t'){
+                i++;
+            }
+            continue;
+        }
+
+        minified += c;
     }
+
     ui->formattedText->setText(minified);
 }
 

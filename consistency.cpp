@@ -33,6 +33,8 @@ bool checkBalancedTags(vector<QString> &rows){
              * */
             if (matchTopWithTag(tagStack.top(), row)) {
                 tagStack.pop();
+            }else{
+                tagStack.push(row);
             }
         }
         /* else: row contains data, ignore it */
@@ -44,18 +46,6 @@ bool checkBalancedTags(vector<QString> &rows){
         return false;
     }
 }
-
-
-bool checkDataPosition(vector<QString> &rows){
-
-    for (int i=0; i< rows.size() -1; i++){
-        if (isClosingTag(rows[i]) && isData(rows[i+1])){
-            return false;
-        }
-    }
-    return true;
-}
-
 
 
 
