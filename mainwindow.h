@@ -41,6 +41,12 @@ private slots:
     */
     void on_saveNew_clicked();
 
+
+    /*
+     * Minify XML process
+    */
+    void on_minify_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

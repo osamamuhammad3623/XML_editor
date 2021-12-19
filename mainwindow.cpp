@@ -5,6 +5,7 @@
 #include "ui_mainwindow.h"
 #include "GUI_Functions.h"
 #include "QMessageBox"
+#include "QTextStream"
 #include "QDebug"
 
 
@@ -25,7 +26,6 @@ MainWindow::~MainWindow()
 QString xmlLines="";
 vector<QString> xmlVector;
 bool consistencyChecked = false;
-bool fileFormatted = false;
 bool balanced=false; /* tags in xml */
 
 void MainWindow::on_loadFile_clicked()
@@ -77,23 +77,39 @@ void MainWindow::on_format_clicked()
     }
 
     ui->formattedText->setText(format(xmlVector));
-    fileFormatted=true;
 }
 
 
 void MainWindow::on_saveNew_clicked()
 {
-    if(fileFormatted){
-        QString formattedXML = ui->formattedText->toPlainText();
-        QFile file("Formatted XML.xml");
-        if (file.open(QFile::WriteOnly | QFile::Text)){
-            //file.write(formattedXML);
-        }else{
-            QMessageBox::warning(this, "Save File", "Couldn't save formatted XML into a new file!");
-        }
+        QString text = ui->formattedText->toPlainText();
+        if (!text.isEmpty()){
 
-    }else{
-        QMessageBox::warning(this, "Save File", "XML is not formatted!");
+            QFile file("newXML.xml");
+            if (file.open(QFile::WriteOnly | QFile::Text)){
+                QTextStream stream(&file);
+                stream << text << endl;
+                file.close();
+                QMessageBox::information(this, "Save file", " newXML.xml is saved!");
+            }else{
+                QMessageBox::warning(this, "Save File", "Couldn't save XML into a new file!");
+            }
+
+        }else{
+            QMessageBox::warning(this, "Save File", "XML is not formatted!");
+        }
+}
+
+
+void MainWindow::on_minify_clicked()
+{
+    QString minified = "";
+    /* remove all new lines chars */
+    for (QChar c : xmlLines){
+        if (c != '\n'){
+            minified += c;
+        }
     }
+    ui->formattedText->setText(minified);
 }
 

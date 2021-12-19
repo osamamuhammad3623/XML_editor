@@ -70,6 +70,15 @@
       <height>391</height>
      </rect>
     </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAsNeeded</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAsNeeded</enum>
+    </property>
+    <property name="sizeAdjustPolicy">
+     <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+    </property>
     <property name="readOnly">
      <bool>true</bool>
     </property>
@@ -175,7 +184,39 @@
      </rect>
     </property>
     <property name="text">
-     <string>Save to a new file</string>
+     <string>Save</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="minify">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>550</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Minify</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="visualize">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>550</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Visualize</string>
     </property>
    </widget>
   </widget>

@@ -3,6 +3,11 @@
 using namespace std;
 
 bool isOpeningTag(QString row){
+    /* for <?xml> tags, should not be considered */
+    if (row[1]=='?'){
+        return false;
+    }
+
     if ((row[0] == '<') && (row[1]!='/') && (row[row.size()-1] == '>')){
         return true;
     }

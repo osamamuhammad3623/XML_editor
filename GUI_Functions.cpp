@@ -19,6 +19,7 @@ QString ViewFileContent(Ui::MainWindow *ui , QWidget *thisWidget, QFile &file){
         ui->analysis->setEnabled(true);
         ui->format->setEnabled(true);
         ui->saveNew->setEnabled(true);
+        ui->minify->setEnabled(true);
     }else{
         QMessageBox::warning(thisWidget, "File Error", "Cannot open the file!");
     }
