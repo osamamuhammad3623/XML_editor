@@ -2,6 +2,7 @@
 #define COMMON_H_
 #include <vector>
 #include "QString"
+#include "mainwindow.h"
 using namespace std;
 
 bool isOpeningTag(QString row);
@@ -9,6 +10,7 @@ bool isOpeningTag(QString row);
 bool isClosingTag(QString row);
 
 bool isData(QString row);
+
 
 /*
  * Desc: A function that takes an XML string and returns a vector of strings, separating

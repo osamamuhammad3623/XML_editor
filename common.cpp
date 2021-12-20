@@ -1,5 +1,7 @@
 #include "common.h"
 #include "QString"
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 using namespace std;
 
 bool isOpeningTag(QString row){
@@ -29,7 +31,7 @@ bool isData(QString row){
 vector<QString> xmlStringToVector(QString &text){
     QString textRows = "";
 
-    /* replace all occurrences in place to separate tags from data */
+    /* replace all occurrences in place, to separate tags from data */
     for (QChar c : text){
         if (c == '<'){
             textRows += "\n<";

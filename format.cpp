@@ -12,7 +12,7 @@ QString format(vector<QString> &rows){
 
     QString formatted = "";
     int level=-1;
-    bool prevData=false;
+    bool prevData=false; /* if the previous row contains data */
     QString prev = "";
 
     for(QString s : rows){

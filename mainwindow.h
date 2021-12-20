@@ -47,6 +47,12 @@ private slots:
     */
     void on_minify_clicked();
 
+
+    /*
+     * reset text status: consistencyChecked, balanced
+    */
+    void on_originalText_textChanged();
+
 private:
     Ui::MainWindow *ui;
 };

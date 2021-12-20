@@ -1,6 +1,7 @@
 ﻿#include "common.h"
 #include "consistency.h"
 #include "format.h"
+#include "minify.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "GUI_Functions.h"
@@ -24,8 +25,6 @@ MainWindow::~MainWindow()
 
 
 /* GLobal variables */
-QString xmlLines="";
-vector<QString> xmlVector;
 bool consistencyChecked = false;
 bool balanced=false; /* tags in xml */
 
@@ -37,8 +36,7 @@ void MainWindow::on_loadFile_clicked()
 
     ui->filePath->setText("\"" + filePath + "\"");
     /* updating global variables to prepare them for processing */
-    xmlLines = ViewFileContent(ui, this, file);
-    xmlVector = xmlStringToVector(xmlLines);
+    ViewFileContent(ui, this, file);
 
     file.close();
 }
@@ -46,12 +44,13 @@ void MainWindow::on_loadFile_clicked()
 
 void MainWindow::on_checkTagsConsistency_clicked()
 {
-    if (xmlLines == ""){
-        QMessageBox::warning(this, "File Error", "Choose a file first!");
+    QString text = readOriginalText(ui, this);
+    if (text == "\0"){
         return;
     }
 
-    balanced = checkBalancedTags(xmlVector);
+    vector<QString> vec = xmlStringToVector(text);
+    balanced = checkBalancedTags(vec);
     if (balanced){
         consistencyChecked = true;
         QMessageBox::information(this, "Tags Consistency", "Tags are balanced");
@@ -63,8 +62,8 @@ void MainWindow::on_checkTagsConsistency_clicked()
 
 void MainWindow::on_format_clicked()
 {
-    if (xmlLines == ""){
-        QMessageBox::warning(this, "File Error", "Choose a file first!");
+    QString text = readOriginalText(ui,this);
+    if (text == "\0"){
         return;
     }else if (!consistencyChecked){
         /* I shouldn't format if tags are not even balanced */
@@ -75,7 +74,8 @@ void MainWindow::on_format_clicked()
         return;
     }
 
-    ui->formattedText->setText(format(xmlVector));
+    vector<QString> vec = xmlStringToVector(text);
+    ui->formattedText->setText(format(vec));
 }
 
 
@@ -102,31 +102,17 @@ void MainWindow::on_saveNew_clicked()
 
 void MainWindow::on_minify_clicked()
 {
-    QString minified = "";
-    QChar c;
-
-    for (int i =0; i< xmlLines.size(); i++){
-        c = xmlLines[i];
-
-        /* remove all newline and tabs chars */
-        if (c == '\n' || c == '\t'){
-            continue;
-        }
-
-        /* remove all spaces between a closing tag and the next opening tag */
-        else if (c == '>'){
-            minified += '>';
-            i++;
-
-            while (xmlLines[i] == ' ' || xmlLines[i] == '\n' || xmlLines[i] == '\t'){
-                i++;
-            }
-            continue;
-        }
-
-        minified += c;
-    }
+    QString text = readOriginalText(ui,this);
+    QString minified = minify(text);
 
     ui->formattedText->setText(minified);
+}
+
+
+void MainWindow::on_originalText_textChanged()
+{
+    /* reset global variables */
+    consistencyChecked = false;
+    balanced=false;
 }
 

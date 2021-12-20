@@ -7,9 +7,19 @@
 
 /*
  * A function that displays text from file to QTextEdit
- * and return QString contains that text.
 */
-QString ViewFileContent(Ui::MainWindow *ui , QWidget *thisWidget, QFile &file);
+void ViewFileContent(Ui::MainWindow *ui , QWidget *thisWidget, QFile &file);
 
+
+/*
+ * Enable GUI buttons that were disabled at start-up
+*/
+void GUI_enableButtons(Ui::MainWindow *ui);
+
+
+/*
+ * Read original text from ui->originalText and return it.
+*/
+QString readOriginalText(Ui::MainWindow *ui, QWidget *thisWidget);
 
 #endif // GUI_FUNCTIONS_H

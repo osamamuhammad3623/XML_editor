@@ -14,14 +14,16 @@ SOURCES += \
     consistency.cpp \
     format.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    minify.cpp
 
 HEADERS += \
     GUI_Functions.h \
     common.h \
     consistency.h \
     format.h \
-    mainwindow.h
+    mainwindow.h \
+    minify.h
 
 FORMS += \
     mainwindow.ui
