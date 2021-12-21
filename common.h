@@ -11,6 +11,11 @@ bool isClosingTag(QString row);
 
 bool isData(QString row);
 
+/*
+ * Desc: remove all leading spaces
+*/
+QString leftTrim(string s);
+
 
 /*
  * Desc: A function that takes an XML string and returns a vector of strings, separating

@@ -16,4 +16,13 @@ bool matchTopWithTag(QString stackTop, QString tag);
  * */
 bool checkBalancedTags(vector<QString> &rows);
 
+
+/*
+ * Desc : A function to check that all opening/closing tags are written correctly
+ * input: incorrectTags: a vector to append the incorrectly written tags
+ *        rows: a vector of rows of the XML
+*/
+bool checkTags( vector<QString> &incorrecTags ,vector<QString> rows);
+
+
 #endif // CONSISTENCY_H

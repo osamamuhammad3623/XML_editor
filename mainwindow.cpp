@@ -30,7 +30,7 @@ bool balanced=false; /* tags in xml */
 
 void MainWindow::on_loadFile_clicked()
 {
-    ui->formattedText->setText(""); /* clear text area */
+    ui->resultText->setText(""); /* clear text area */
     QString filePath = QFileDialog::getOpenFileName(this, "Choose XML file");
     QFile file(filePath);
 
@@ -50,8 +50,23 @@ void MainWindow::on_checkTagsConsistency_clicked()
     }
 
     vector<QString> vec = xmlStringToVector(text);
+
+    vector<QString> wrongWrittenTags;
+    bool correctTags = checkTags(wrongWrittenTags, vec);
+
+    if (!correctTags){
+        QString msg = "The following tag/s is/are incorrectly written,\ncorrect them first\n";
+        for (QString s : wrongWrittenTags){
+            msg += s + "\n";
+        }
+        ui->resultText->setText(msg);
+        return;
+    }
+
     balanced = checkBalancedTags(vec);
     if (balanced){
+        ui->resultText->setText(""); /* clear results widget */
+
         consistencyChecked = true;
         QMessageBox::information(this, "Tags Consistency", "Tags are balanced");
     }else{
@@ -75,13 +90,13 @@ void MainWindow::on_format_clicked()
     }
 
     vector<QString> vec = xmlStringToVector(text);
-    ui->formattedText->setText(format(vec));
+    ui->resultText->setText(format(vec));
 }
 
 
 void MainWindow::on_saveNew_clicked()
 {
-        QString text = ui->formattedText->toPlainText();
+        QString text = ui->resultText->toPlainText();
         if (!text.isEmpty()){
 
             QFile file("newXML.xml");
@@ -103,9 +118,20 @@ void MainWindow::on_saveNew_clicked()
 void MainWindow::on_minify_clicked()
 {
     QString text = readOriginalText(ui,this);
+    if (text == "\0"){
+        return;
+    }else if (!consistencyChecked){
+        /* I shouldn't minify if tags are not even balanced */
+        QMessageBox::warning(this, "Minifying", "You should check if tags are balanced or not first!");
+        return;
+    }else if (!balanced){
+        QMessageBox::warning(this, "Tags Consistency", "Tags are NOT balanced to format!");
+        return;
+    }
+
     QString minified = minify(text);
 
-    ui->formattedText->setText(minified);
+    ui->resultText->setText(minified);
 }
 
 
@@ -115,4 +141,3 @@ void MainWindow::on_originalText_textChanged()
     consistencyChecked = false;
     balanced=false;
 }
-

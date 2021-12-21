@@ -1,5 +1,6 @@
 #include "consistency.h"
 #include "common.h"
+#include "QDebug"
 #include <stack>
 using namespace std;
 
@@ -48,7 +49,24 @@ bool checkBalancedTags(vector<QString> &rows){
 }
 
 
+bool checkTags( vector<QString> &incorrecTags ,vector<QString> rows){
+    bool state = true;
+    for (QString s: rows){
 
+        /* <tag */
+        if (s[0] == '<' && s[s.size()-1] != '>'){
+            state = false;
+            incorrecTags.push_back(s);
+        }
+        /* tag> */
+        else if (s[0] != '<' && s[s.size()-1] == '>'){
+            state = false;
+            incorrecTags.push_back(s);
+        }
+    }
+
+    return state;
+}
 
 
 

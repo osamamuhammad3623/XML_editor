@@ -1,5 +1,6 @@
 #include "common.h"
 #include "QString"
+#include "QDebug"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 using namespace std;
@@ -28,6 +29,19 @@ bool isData(QString row){
     return (!(isOpeningTag(row)) && (!isClosingTag(row)));
 }
 
+
+QString leftTrim(string s){
+    QString result = "";
+    for (int i=0; i<s.size(); i++){
+        if (!isspace(s[i])){
+            result+= s[i];
+        }
+    }
+
+    return result;
+}
+
+
 vector<QString> xmlStringToVector(QString &text){
     QString textRows = "";
 
@@ -52,6 +66,11 @@ vector<QString> xmlStringToVector(QString &text){
         }else{
             line+= c;
         }
+    }
+
+    /* left-trim rows */
+    for (int i=0; i < rows.size(); i++){
+        rows[i] = leftTrim(rows[i].toStdString());
     }
 
     /* remove empty rows */

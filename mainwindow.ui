@@ -30,7 +30,7 @@
      <string>Original file data</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="formattedText">
+   <widget class="QTextEdit" name="resultText">
     <property name="geometry">
      <rect>
       <x>750</x>
@@ -52,7 +52,7 @@
      <bool>true</bool>
     </property>
     <property name="placeholderText">
-     <string>XML file after format</string>
+     <string>Results &amp; outputs</string>
     </property>
    </widget>
    <widget class="QPushButton" name="loadFile">
