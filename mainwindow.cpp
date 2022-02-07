@@ -5,6 +5,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "GUI_Functions.h"
+#include "networkVisual.h"
 #include "QMessageBox"
 #include "QTextStream"
 #include "QFileDialog"
@@ -27,6 +28,7 @@ MainWindow::~MainWindow()
 /* GLobal variables */
 bool consistencyChecked = false;
 bool balanced=false; /* tags in xml */
+
 
 void MainWindow::on_loadFile_clicked()
 {
@@ -141,3 +143,18 @@ void MainWindow::on_originalText_textChanged()
     consistencyChecked = false;
     balanced=false;
 }
+
+void MainWindow::on_visualize_clicked()
+{
+    QString text = readOriginalText(ui, this);
+    if (text == "\0"){
+        return;
+    }
+
+    vector<QString> vec = xmlStringToVector(text);
+
+    vector<vector<QString>> adList = extractNetwork(vec);
+    storeAdjacencyList(adList);
+    visualize();
+}
+

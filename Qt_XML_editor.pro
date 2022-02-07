@@ -15,7 +15,8 @@ SOURCES += \
     format.cpp \
     main.cpp \
     mainwindow.cpp \
-    minify.cpp
+    minify.cpp \
+    networkVisual.cpp
 
 HEADERS += \
     GUI_Functions.h \
@@ -23,7 +24,8 @@ HEADERS += \
     consistency.h \
     format.h \
     mainwindow.h \
-    minify.h
+    minify.h \
+    networkVisual.h
 
 FORMS += \
     mainwindow.ui
@@ -32,3 +34,5 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES +=

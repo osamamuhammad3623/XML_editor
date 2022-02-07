@@ -53,6 +53,8 @@ private slots:
     */
     void on_originalText_textChanged();
 
+    void on_visualize_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

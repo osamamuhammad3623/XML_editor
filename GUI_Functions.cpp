@@ -23,7 +23,6 @@ void ViewFileContent(Ui::MainWindow *ui , QWidget *thisWidget, QFile &file){
 
 void GUI_enableButtons(Ui::MainWindow *ui){
     ui->checkTagsConsistency->setEnabled(true);
-    ui->analysis->setEnabled(true);
     ui->format->setEnabled(true);
     ui->saveNew->setEnabled(true);
     ui->minify->setEnabled(true);
